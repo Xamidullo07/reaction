@@ -1,10 +1,18 @@
-import { motion } from 'framer-motion';
-import { useState } from 'react';
-import type { Country } from '../types';
-import { formatArea, formatPopulation } from '../utils/formatters';
-import { Card, CardContent } from '../components/ui/card';
-import { Badge } from '../components/ui/badge';
-import { MapPin, Users, Globe, Star, Map, ExternalLink, Heart } from 'lucide-react';
+import { motion } from "framer-motion";
+import { useState } from "react";
+import type { Country } from "../types";
+import { formatArea, formatPopulation } from "../utils/formatters";
+import { Card, CardContent } from "../components/ui/card";
+import { Badge } from "../components/ui/badge";
+import {
+  MapPin,
+  Users,
+  Globe,
+  Star,
+  Map,
+  ExternalLink,
+  Heart,
+} from "lucide-react";
 
 interface EnhancedCountryCardProps {
   country: Country;
@@ -13,23 +21,28 @@ interface EnhancedCountryCardProps {
   onMapClick: () => void;
 }
 
-export const EnhancedCountryCard = ({ country, index, onClick, onMapClick }: EnhancedCountryCardProps) => {
+export const EnhancedCountryCard = ({
+  country,
+  index,
+  onClick,
+  onMapClick,
+}: EnhancedCountryCardProps) => {
   const [isLiked, setIsLiked] = useState(false);
 
   return (
     <motion.div
       initial={{ opacity: 0, y: 30 }}
       animate={{ opacity: 1, y: 0 }}
-      transition={{ 
-        duration: 0.6, 
+      transition={{
+        duration: 0.6,
         delay: index * 0.1,
         type: "spring",
         stiffness: 100,
-        damping: 15
+        damping: 15,
       }}
-      whileHover={{ 
+      whileHover={{
         scale: 1.02,
-        transition: { duration: 0.2 }
+        transition: { duration: 0.2 },
       }}
       className="relative group"
     >
@@ -37,28 +50,28 @@ export const EnhancedCountryCard = ({ country, index, onClick, onMapClick }: Enh
         <div className="relative">
           {/* Country Flag as Background */}
           <div className="relative h-56 overflow-hidden">
-            <motion.img 
-              src={country.flag} 
+            <motion.img
+              src={country.flag}
               alt={`${country.name} flag`}
               className="w-full h-full object-cover"
               whileHover={{ scale: 1.1 }}
               transition={{ duration: 0.5 }}
             />
             <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/30 to-transparent" />
-            
+
             {/* Floating Flag Icon */}
-            <motion.div 
+            <motion.div
               className="absolute top-4 right-4 w-16 h-16 rounded-full overflow-hidden border-4 border-white shadow-lg"
               whileHover={{ scale: 1.1, rotate: 5 }}
               whileTap={{ scale: 0.95 }}
             >
-              <img 
-                src={country.flag} 
+              <img
+                src={country.flag}
                 alt={country.name}
                 className="w-full h-full object-cover"
               />
             </motion.div>
-            
+
             {/* Like Button */}
             <motion.button
               className="absolute top-4 left-4 w-10 h-10 rounded-full bg-white/90 backdrop-blur-sm flex items-center justify-center shadow-lg"
@@ -69,13 +82,13 @@ export const EnhancedCountryCard = ({ country, index, onClick, onMapClick }: Enh
                 setIsLiked(!isLiked);
               }}
             >
-              <Heart 
-                className={`w-5 h-5 transition-colors ${isLiked ? 'fill-red-500 text-red-500' : 'text-gray-600'}`}
+              <Heart
+                className={`w-5 h-5 transition-colors ${isLiked ? "fill-red-500 text-red-500" : "text-gray-600"}`}
               />
             </motion.button>
-            
+
             {/* Country Info Overlay */}
-            <motion.div 
+            <motion.div
               className="absolute bottom-0 left-0 right-0 p-4 text-white"
               initial={{ y: 20, opacity: 0 }}
               whileHover={{ y: 0, opacity: 1 }}
@@ -89,11 +102,11 @@ export const EnhancedCountryCard = ({ country, index, onClick, onMapClick }: Enh
             </motion.div>
           </div>
         </div>
-        
+
         <CardContent className="p-5 space-y-4">
           {/* Quick Stats */}
           <div className="grid grid-cols-2 gap-3">
-            <motion.div 
+            <motion.div
               className="bg-gradient-to-r from-blue-50 to-blue-100 rounded-lg p-3"
               whileHover={{ scale: 1.05 }}
             >
@@ -101,10 +114,12 @@ export const EnhancedCountryCard = ({ country, index, onClick, onMapClick }: Enh
                 <Users className="w-4 h-4" />
                 <span className="text-xs font-medium">Aholi</span>
               </div>
-              <p className="font-bold text-blue-800">{formatPopulation(country.population)}</p>
+              <p className="font-bold text-blue-800">
+                {formatPopulation(country.population)}
+              </p>
             </motion.div>
-            
-            <motion.div 
+
+            <motion.div
               className="bg-gradient-to-r from-green-50 to-green-100 rounded-lg p-3"
               whileHover={{ scale: 1.05 }}
             >
@@ -112,14 +127,19 @@ export const EnhancedCountryCard = ({ country, index, onClick, onMapClick }: Enh
                 <Globe className="w-4 h-4" />
                 <span className="text-xs font-medium">Maydon</span>
               </div>
-              <p className="font-bold text-green-800">{formatArea(country.area)}</p>
+              <p className="font-bold text-green-800">
+                {formatArea(country.area)}
+              </p>
             </motion.div>
           </div>
-          
+
           {/* Badges */}
           <div className="flex gap-2 flex-wrap">
             <motion.div whileHover={{ scale: 1.05 }}>
-              <Badge variant="secondary" className="text-xs bg-purple-100 text-purple-800">
+              <Badge
+                variant="secondary"
+                className="text-xs bg-purple-100 text-purple-800"
+              >
                 {country.language.toUpperCase()}
               </Badge>
             </motion.div>
@@ -132,13 +152,16 @@ export const EnhancedCountryCard = ({ country, index, onClick, onMapClick }: Enh
             )}
             {country.landlocked && (
               <motion.div whileHover={{ scale: 1.05 }}>
-                <Badge variant="outline" className="text-xs bg-orange-100 text-orange-800">
+                <Badge
+                  variant="outline"
+                  className="text-xs bg-orange-100 text-orange-800"
+                >
                   Quruqlik
                 </Badge>
               </motion.div>
             )}
           </div>
-          
+
           {/* Landmarks Preview */}
           {country.landmarks && country.landmarks.length > 0 && (
             <div className="space-y-2">
@@ -154,8 +177,8 @@ export const EnhancedCountryCard = ({ country, index, onClick, onMapClick }: Enh
                     whileHover={{ scale: 1.1, zIndex: 10 }}
                     title={landmark.name}
                   >
-                    <img 
-                      src={landmark.image} 
+                    <img
+                      src={landmark.image}
                       alt={landmark.name}
                       className="w-full h-full object-cover"
                     />
@@ -170,7 +193,7 @@ export const EnhancedCountryCard = ({ country, index, onClick, onMapClick }: Enh
               </div>
             </div>
           )}
-          
+
           {/* Action Buttons */}
           <div className="flex gap-2 pt-2">
             <motion.button
@@ -182,7 +205,7 @@ export const EnhancedCountryCard = ({ country, index, onClick, onMapClick }: Enh
               Batafsil
               <ExternalLink className="w-4 h-4" />
             </motion.button>
-            
+
             <motion.button
               className="bg-gradient-to-r from-green-500 to-green-600 text-white p-2 rounded-lg"
               whileHover={{ scale: 1.02 }}

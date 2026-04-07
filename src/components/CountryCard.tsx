@@ -1,7 +1,7 @@
-import type { Country } from '../types';
-import { formatArea, formatPopulation } from '../utils/formatters';
-import { Card, CardContent } from '../components/ui/card';
-import { Badge } from '../components/ui/badge';
+import type { Country } from "../types";
+import { formatArea, formatPopulation } from "../utils/formatters";
+import { Card, CardContent } from "../components/ui/card";
+import { Badge } from "../components/ui/badge";
 
 interface CountryCardProps {
   country: Country;
@@ -10,14 +10,14 @@ interface CountryCardProps {
 
 export const CountryCard = ({ country, onClick }: CountryCardProps) => {
   return (
-    <Card 
+    <Card
       className="cursor-pointer hover:shadow-lg transition-all duration-300 transform hover:-translate-y-1"
       onClick={onClick}
     >
       <CardContent className="p-0">
         <div className="relative">
-          <img 
-            src={country.flag} 
+          <img
+            src={country.flag}
             alt={`${country.name} flag`}
             className="w-full h-48 object-cover"
           />
@@ -27,18 +27,20 @@ export const CountryCard = ({ country, onClick }: CountryCardProps) => {
             <p className="text-sm opacity-90">{country.capital}</p>
           </div>
         </div>
-        
+
         <div className="p-4 space-y-3">
           <div className="flex justify-between items-center">
             <span className="text-sm text-gray-600">Aholi:</span>
-            <span className="font-semibold">{formatPopulation(country.population)}</span>
+            <span className="font-semibold">
+              {formatPopulation(country.population)}
+            </span>
           </div>
-          
+
           <div className="flex justify-between items-center">
             <span className="text-sm text-gray-600">Maydon:</span>
             <span className="font-semibold">{formatArea(country.area)}</span>
           </div>
-          
+
           <div className="flex gap-2">
             <Badge variant="secondary" className="text-xs">
               {country.language.toUpperCase()}

@@ -1,8 +1,13 @@
-import { useState } from 'react';
-import type { SearchParams, Language } from '../types';
-import { Button } from '../components/ui/button';
-import { Card, CardContent, CardHeader, CardTitle } from '../components/ui/card';
-import { getTranslation } from '../utils/formatters';
+import { useState } from "react";
+import type { SearchParams, Language } from "../types";
+import { Button } from "../components/ui/button";
+import {
+  Card,
+  CardContent,
+  CardHeader,
+  CardTitle,
+} from "../components/ui/card";
+import { getTranslation } from "../utils/formatters";
 
 interface FilterPanelProps {
   onFilterChange: (filters: SearchParams) => void;
@@ -26,102 +31,120 @@ export const FilterPanel = ({ onFilterChange, language }: FilterPanelProps) => {
     <Card className="mb-6">
       <CardHeader>
         <div className="flex items-center justify-between">
-          <CardTitle className="text-lg">{getTranslation(language, 'filter')}</CardTitle>
-          <Button
-            variant="ghost"
-            size="sm"
-            onClick={() => setIsOpen(!isOpen)}
-          >
-            {isOpen ? 'Yopish' : 'Ochish'}
+          <CardTitle className="text-lg">
+            {getTranslation(language, "filter")}
+          </CardTitle>
+          <Button variant="ghost" size="sm" onClick={() => setIsOpen(!isOpen)}>
+            {isOpen ? "Yopish" : "Ochish"}
           </Button>
         </div>
       </CardHeader>
-      
+
       {isOpen && (
         <CardContent className="space-y-4">
           <div>
             <label className="text-sm font-medium mb-2 block">
-              {getTranslation(language, 'searchPlaceholder')}
+              {getTranslation(language, "searchPlaceholder")}
             </label>
             <Input
-              placeholder={getTranslation(language, 'searchPlaceholder')}
-              value={filters.search || ''}
-              onChange={(e) => setFilters({ ...filters, search: e.target.value })}
+              placeholder={getTranslation(language, "searchPlaceholder")}
+              value={filters.search || ""}
+              onChange={(e) =>
+                setFilters({ ...filters, search: e.target.value })
+              }
             />
           </div>
-          
+
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
             <div>
               <label className="text-sm font-medium mb-2 block">
-                {getTranslation(language, 'populationMin')}
+                {getTranslation(language, "populationMin")}
               </label>
               <Input
                 type="number"
                 placeholder="1000000"
-                value={filters.population_min || ''}
-                onChange={(e) => setFilters({ 
-                  ...filters, 
-                  population_min: e.target.value ? Number(e.target.value) : undefined 
-                })}
+                value={filters.population_min || ""}
+                onChange={(e) =>
+                  setFilters({
+                    ...filters,
+                    population_min: e.target.value
+                      ? Number(e.target.value)
+                      : undefined,
+                  })
+                }
               />
             </div>
-            
+
             <div>
               <label className="text-sm font-medium mb-2 block">
-                {getTranslation(language, 'populationMax')}
+                {getTranslation(language, "populationMax")}
               </label>
               <Input
                 type="number"
                 placeholder="100000000"
-                value={filters.population_max || ''}
-                onChange={(e) => setFilters({ 
-                  ...filters, 
-                  population_max: e.target.value ? Number(e.target.value) : undefined 
-                })}
+                value={filters.population_max || ""}
+                onChange={(e) =>
+                  setFilters({
+                    ...filters,
+                    population_max: e.target.value
+                      ? Number(e.target.value)
+                      : undefined,
+                  })
+                }
               />
             </div>
-            
+
             <div>
               <label className="text-sm font-medium mb-2 block">
-                {getTranslation(language, 'areaMin')}
+                {getTranslation(language, "areaMin")}
               </label>
               <Input
                 type="number"
                 placeholder="1000"
-                value={filters.area_min || ''}
-                onChange={(e) => setFilters({ 
-                  ...filters, 
-                  area_min: e.target.value ? Number(e.target.value) : undefined 
-                })}
+                value={filters.area_min || ""}
+                onChange={(e) =>
+                  setFilters({
+                    ...filters,
+                    area_min: e.target.value
+                      ? Number(e.target.value)
+                      : undefined,
+                  })
+                }
               />
             </div>
-            
+
             <div>
               <label className="text-sm font-medium mb-2 block">
-                {getTranslation(language, 'areaMax')}
+                {getTranslation(language, "areaMax")}
               </label>
               <Input
                 type="number"
                 placeholder="1000000"
-                value={filters.area_max || ''}
-                onChange={(e) => setFilters({ 
-                  ...filters, 
-                  area_max: e.target.value ? Number(e.target.value) : undefined 
-                })}
+                value={filters.area_max || ""}
+                onChange={(e) =>
+                  setFilters({
+                    ...filters,
+                    area_max: e.target.value
+                      ? Number(e.target.value)
+                      : undefined,
+                  })
+                }
               />
             </div>
           </div>
-          
+
           <div>
             <label className="text-sm font-medium mb-2 block">
-              {getTranslation(language, 'language')}
+              {getTranslation(language, "language")}
             </label>
             <Select
-              value={filters.language || 'all'}
-              onValueChange={(value) => setFilters({ 
-                ...filters, 
-                language: value === 'all' ? undefined : value
-              })}
+              value={filters.language || "all"}
+              onValueChange={(value) =>
+                setFilters({
+                  ...filters,
+                  language: value === "all" ? undefined : value,
+                })
+              }
             >
               <SelectTrigger>
                 <SelectValue placeholder="Tilni tanlang" />
@@ -139,13 +162,13 @@ export const FilterPanel = ({ onFilterChange, language }: FilterPanelProps) => {
               </SelectContent>
             </Select>
           </div>
-          
+
           <div className="flex gap-2">
             <Button onClick={handleApply}>
-              {getTranslation(language, 'apply')}
+              {getTranslation(language, "apply")}
             </Button>
             <Button variant="outline" onClick={handleReset}>
-              {getTranslation(language, 'reset')}
+              {getTranslation(language, "reset")}
             </Button>
           </div>
         </CardContent>

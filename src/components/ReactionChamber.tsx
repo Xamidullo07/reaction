@@ -1,9 +1,9 @@
-import { useRef, useState, useEffect } from 'react';
-import { motion, AnimatePresence } from 'framer-motion';
-import type { Atom } from '../types/chemistry';
-import { AtomComponent } from './Atom';
-import { MoleculeComponent } from './Molecule';
-import { FlaskConical, Sparkles } from 'lucide-react';
+import { useRef, useState, useEffect } from "react";
+import { motion, AnimatePresence } from "framer-motion";
+import type { Atom } from "../types/chemistry";
+import { AtomComponent } from "./Atom";
+import { MoleculeComponent } from "./Molecule";
+import { FlaskConical, Sparkles } from "lucide-react";
 
 interface ReactionChamberProps {
   atoms: Atom[];
@@ -13,22 +13,30 @@ interface ReactionChamberProps {
   chamberColor?: string;
 }
 
-export const ReactionChamber = ({ atoms, products, isReacting, onAtomClick, chamberColor }: ReactionChamberProps) => {
+export const ReactionChamber = ({
+  atoms,
+  products,
+  isReacting,
+  onAtomClick,
+  chamberColor,
+}: ReactionChamberProps) => {
   const chamberRef = useRef<HTMLDivElement>(null);
-  const [bubbles, setBubbles] = useState<Array<{ id: number; x: number; y: number; size: number }>>([]);
+  const [bubbles, setBubbles] = useState<
+    Array<{ id: number; x: number; y: number; size: number }>
+  >([]);
 
   // Generate bubbles during reaction
   useEffect(() => {
     if (isReacting) {
       const interval = setInterval(() => {
-        setBubbles(prev => [
+        setBubbles((prev) => [
           ...prev.slice(-10), // Keep max 10 bubbles
           {
             id: Date.now(),
             x: Math.random() * 300 + 20,
             y: 300 + Math.random() * 20,
-            size: Math.random() * 10 + 5
-          }
+            size: Math.random() * 10 + 5,
+          },
         ]);
       }, 100);
 
@@ -49,17 +57,17 @@ export const ReactionChamber = ({ atoms, products, isReacting, onAtomClick, cham
       <motion.div
         ref={chamberRef}
         className={`relative w-80 h-80 rounded-b-full border-4 border-gray-300 overflow-hidden shadow-2xl transition-colors duration-1000 ${
-          chamberColor ? 'bg-opacity-80' : 'bg-gray-50'
+          chamberColor ? "bg-opacity-80" : "bg-gray-50"
         }`}
-        style={{ backgroundColor: chamberColor || '#f9fafb' }}
+        style={{ backgroundColor: chamberColor || "#f9fafb" }}
         animate={isReacting ? { scale: [1, 1.02, 1] } : {}}
         transition={{ duration: 0.5, repeat: isReacting ? Infinity : 0 }}
       >
         {/* Liquid Level */}
         <motion.div
           className="absolute bottom-0 left-0 right-0 bg-blue-100/30 rounded-b-full"
-          initial={{ height: '0%' }}
-          animate={{ height: '60%' }}
+          initial={{ height: "0%" }}
+          animate={{ height: "60%" }}
           transition={{ duration: 1 }}
         />
 
@@ -73,7 +81,7 @@ export const ReactionChamber = ({ atoms, products, isReacting, onAtomClick, cham
                 width: bubble.size,
                 height: bubble.size,
                 left: bubble.x,
-                top: bubble.y
+                top: bubble.y,
               }}
               initial={{ y: 300, opacity: 0.8 }}
               animate={{ y: -50, opacity: 0 }}
@@ -85,27 +93,29 @@ export const ReactionChamber = ({ atoms, products, isReacting, onAtomClick, cham
 
         {/* Atoms */}
         <AnimatePresence>
-          {!isReacting && atoms.map((atom) => (
-            <AtomComponent
-              key={atom.id}
-              element={atom.element}
-              x={atom.x}
-              y={atom.y}
-              onClick={() => onAtomClick(atom.id)}
-            />
-          ))}
+          {!isReacting &&
+            atoms.map((atom) => (
+              <AtomComponent
+                key={atom.id}
+                element={atom.element}
+                x={atom.x}
+                y={atom.y}
+                onClick={() => onAtomClick(atom.id)}
+              />
+            ))}
         </AnimatePresence>
 
         {/* Products (Molecules) */}
         <AnimatePresence>
-          {isReacting && products.map((formula, index) => (
-            <MoleculeComponent
-              key={formula + index}
-              formula={formula}
-              x={100 + (index % 3) * 80}
-              y={100 + Math.floor(index / 3) * 80}
-            />
-          ))}
+          {isReacting &&
+            products.map((formula, index) => (
+              <MoleculeComponent
+                key={formula + index}
+                formula={formula}
+                x={100 + (index % 3) * 80}
+                y={100 + Math.floor(index / 3) * 80}
+              />
+            ))}
         </AnimatePresence>
 
         {/* Reaction Sparkle Effect */}

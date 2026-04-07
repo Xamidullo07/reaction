@@ -1,7 +1,7 @@
-import { ChevronLeft, ChevronRight } from 'lucide-react';
-import { Button } from '../components/ui/button';
-import { getTranslation } from '../utils/formatters';
-import type { Language } from '../types';
+import { ChevronLeft, ChevronRight } from "lucide-react";
+import { Button } from "../components/ui/button";
+import { getTranslation } from "../utils/formatters";
+import type { Language } from "../types";
 
 interface PaginationProps {
   currentPage: number;
@@ -10,9 +10,17 @@ interface PaginationProps {
   language: Language;
 }
 
-export const Pagination = ({ currentPage, totalPages, onPageChange, language }: PaginationProps) => {
+export const Pagination = ({
+  currentPage,
+  totalPages,
+  onPageChange,
+  language,
+}: PaginationProps) => {
   const pages = Array.from({ length: totalPages }, (_, i) => i + 1);
-  const showPages = pages.slice(Math.max(0, currentPage - 3), Math.min(totalPages, currentPage + 2));
+  const showPages = pages.slice(
+    Math.max(0, currentPage - 3),
+    Math.min(totalPages, currentPage + 2),
+  );
 
   return (
     <div className="flex items-center justify-center gap-2 mt-8">
@@ -23,9 +31,9 @@ export const Pagination = ({ currentPage, totalPages, onPageChange, language }: 
         disabled={currentPage === 1}
       >
         <ChevronLeft className="w-4 h-4 mr-1" />
-        {getTranslation(language, 'previous')}
+        {getTranslation(language, "previous")}
       </Button>
-      
+
       {showPages.map((page) => (
         <Button
           key={page}
@@ -36,14 +44,14 @@ export const Pagination = ({ currentPage, totalPages, onPageChange, language }: 
           {page}
         </Button>
       ))}
-      
+
       <Button
         variant="outline"
         size="sm"
         onClick={() => onPageChange(currentPage + 1)}
         disabled={currentPage === totalPages}
       >
-        {getTranslation(language, 'next')}
+        {getTranslation(language, "next")}
         <ChevronRight className="w-4 h-4 ml-1" />
       </Button>
     </div>

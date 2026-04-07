@@ -1,9 +1,14 @@
-import { Button } from '../components/ui/button';
-import { Card, CardContent, CardHeader, CardTitle } from '../components/ui/card';
-import { ELEMENTS } from '../data/elements';
-import type { Element as ElementType } from '../types/chemistry';
-import { FlaskConical, RotateCcw, Zap } from 'lucide-react';
-import { motion } from 'framer-motion';
+import { Button } from "../components/ui/button";
+import {
+  Card,
+  CardContent,
+  CardHeader,
+  CardTitle,
+} from "../components/ui/card";
+import { ELEMENTS } from "../data/elements";
+import type { Element as ElementType } from "../types/chemistry";
+import { FlaskConical, RotateCcw, Zap } from "lucide-react";
+import { motion } from "framer-motion";
 
 interface ControlPanelProps {
   onAddAtom: (element: ElementType) => void;
@@ -14,7 +19,14 @@ interface ControlPanelProps {
   selectedReaction: string | null;
 }
 
-export const ControlPanel = ({ onAddAtom, onReact, onReset, canReact, isReacting, selectedReaction }: ControlPanelProps) => {
+export const ControlPanel = ({
+  onAddAtom,
+  onReact,
+  onReset,
+  canReact,
+  isReacting,
+  selectedReaction,
+}: ControlPanelProps) => {
   return (
     <div className="space-y-6">
       {/* Elements Shelf */}
@@ -35,20 +47,24 @@ export const ControlPanel = ({ onAddAtom, onReact, onReset, canReact, isReacting
                 onClick={() => !isReacting && onAddAtom(element)}
                 disabled={isReacting}
                 className={`flex flex-col items-center gap-2 p-3 rounded-xl transition-all ${
-                  isReacting ? 'opacity-50 cursor-not-allowed' : 'hover:bg-gray-50 cursor-pointer'
+                  isReacting
+                    ? "opacity-50 cursor-not-allowed"
+                    : "hover:bg-gray-50 cursor-pointer"
                 }`}
               >
                 <div
                   className="w-12 h-12 rounded-full flex items-center justify-center font-bold text-white shadow-md border-2 border-white"
                   style={{
                     backgroundColor: element.color,
-                    color: element.id === 'H' ? '#333' : '#fff',
-                    boxShadow: `0 4px 10px ${element.color}66`
+                    color: element.id === "H" ? "#333" : "#fff",
+                    boxShadow: `0 4px 10px ${element.color}66`,
                   }}
                 >
                   {element.symbol}
                 </div>
-                <span className="text-xs font-medium text-gray-600">{element.nameUz}</span>
+                <span className="text-xs font-medium text-gray-600">
+                  {element.nameUz}
+                </span>
               </motion.button>
             ))}
           </div>
@@ -88,7 +104,9 @@ export const ControlPanel = ({ onAddAtom, onReact, onReset, canReact, isReacting
           animate={{ opacity: 1, y: 0 }}
           className="bg-blue-50 border border-blue-200 rounded-lg p-4"
         >
-          <p className="text-sm font-semibold text-blue-800 mb-1">Mumkin bo'lgan reaksiya:</p>
+          <p className="text-sm font-semibold text-blue-800 mb-1">
+            Mumkin bo'lgan reaksiya:
+          </p>
           <p className="text-sm text-blue-600">{selectedReaction}</p>
         </motion.div>
       )}

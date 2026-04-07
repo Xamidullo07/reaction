@@ -31,7 +31,7 @@ export interface Landmark {
     lat: number;
     lng: number;
   };
-  type: 'historical' | 'natural' | 'modern' | 'cultural';
+  type: "historical" | "natural" | "modern" | "cultural";
   city: string;
 }
 
@@ -51,8 +51,8 @@ export interface SearchParams {
   language?: string;
   region?: string;
   page?: number;
-  sort_by?: 'name' | 'population' | 'area';
-  sort_order?: 'asc' | 'desc';
+  sort_by?: "name" | "population" | "area";
+  sort_order?: "asc" | "desc";
 }
 
 export interface Statistics {
@@ -68,7 +68,7 @@ export interface Statistics {
   regionsCount: Record<string, number>;
 }
 
-export type Language = 'uz' | 'en' | 'ru';
+export type Language = "uz" | "en" | "ru";
 
 export interface Product {
   id: number;
