@@ -1,5 +1,5 @@
 import { useState, useCallback } from 'react';
-import { CartItem } from '../types';
+import type { CartItem } from '../types';
 
 // Using a simple store pattern with React hooks
 let cartItems: CartItem[] = [];
@@ -30,10 +30,10 @@ export const useCartStore = () => {
     
     if (existingItem) {
       cartItems = cartItems.map((i) =>
-        i.id === item.id ? { ...i, qty: i.qty + 1 } : i
+        i.id === item.id ? { ...i, qty: (i.qty ?? 1) + 1 } : i
       );
     } else {
-      cartItems = [...cartItems, item];
+      cartItems = [...cartItems, { ...item, qty: item.qty ?? 1 }];
     }
     notifyListeners();
   }, []);

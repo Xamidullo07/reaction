@@ -7,6 +7,8 @@ import {
   CardHeader,
   CardTitle,
 } from "../components/ui/card";
+import { Input } from "../components/ui/input";
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "../components/ui/select";
 import { getTranslation } from "../utils/formatters";
 
 interface FilterPanelProps {
@@ -49,7 +51,7 @@ export const FilterPanel = ({ onFilterChange, language }: FilterPanelProps) => {
             <Input
               placeholder={getTranslation(language, "searchPlaceholder")}
               value={filters.search || ""}
-              onChange={(e) =>
+              onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
                 setFilters({ ...filters, search: e.target.value })
               }
             />
@@ -64,7 +66,7 @@ export const FilterPanel = ({ onFilterChange, language }: FilterPanelProps) => {
                 type="number"
                 placeholder="1000000"
                 value={filters.population_min || ""}
-                onChange={(e) =>
+                onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
                   setFilters({
                     ...filters,
                     population_min: e.target.value
@@ -83,7 +85,7 @@ export const FilterPanel = ({ onFilterChange, language }: FilterPanelProps) => {
                 type="number"
                 placeholder="100000000"
                 value={filters.population_max || ""}
-                onChange={(e) =>
+                onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
                   setFilters({
                     ...filters,
                     population_max: e.target.value
@@ -102,7 +104,7 @@ export const FilterPanel = ({ onFilterChange, language }: FilterPanelProps) => {
                 type="number"
                 placeholder="1000"
                 value={filters.area_min || ""}
-                onChange={(e) =>
+                onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
                   setFilters({
                     ...filters,
                     area_min: e.target.value
@@ -121,7 +123,7 @@ export const FilterPanel = ({ onFilterChange, language }: FilterPanelProps) => {
                 type="number"
                 placeholder="1000000"
                 value={filters.area_max || ""}
-                onChange={(e) =>
+                onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
                   setFilters({
                     ...filters,
                     area_max: e.target.value
@@ -139,7 +141,7 @@ export const FilterPanel = ({ onFilterChange, language }: FilterPanelProps) => {
             </label>
             <Select
               value={filters.language || "all"}
-              onValueChange={(value) =>
+              onValueChange={(value: string) =>
                 setFilters({
                   ...filters,
                   language: value === "all" ? undefined : value,

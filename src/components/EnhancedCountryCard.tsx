@@ -170,7 +170,7 @@ export const EnhancedCountryCard = ({
                 Diqqatga sazovor joylar
               </p>
               <div className="flex gap-2">
-                {country.landmarks.slice(0, 3).map((landmark, idx) => (
+                {country.landmarks.slice(0, 3).map((landmark) => (
                   <motion.div
                     key={landmark.id}
                     className="relative w-16 h-16 rounded-lg overflow-hidden"

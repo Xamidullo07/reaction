@@ -1,9 +1,8 @@
 import { Heart, ShoppingCart, Check } from 'lucide-react';
-import { useState } from 'react';
 import { Button } from '../components/ui/button';
 import { Badge } from '../components/ui/badge';
 import { cn } from '../lib/utils';
-import { Product } from '../types';
+import type { Product } from '../types';
 import { formatPrice, calculateDiscountedPrice } from '../utils';
 import { StarRating } from './StarRating';
 import { useCartStore } from '../store/useCartStore';
@@ -21,14 +20,15 @@ export const ProductCard = ({ product }: ProductCardProps) => {
   const inCart = isInCart(id);
   const favorited = isFavorite(id);
   
-  const discountedPrice = calculateDiscountedPrice(price, discount);
+  const discountedPrice = calculateDiscountedPrice(price, discount ?? 0);
   const cartItem = {
     id,
-    name: name_uz,
-    price: discountedPrice,
-    qty: 1,
-    image: mainImageUrl,
-    rating,
+    product: {
+      id,
+      name_uz,
+      price: discountedPrice,
+      images: [{ status: 'M', source: mainImageUrl }],
+    },
   };
 
   const handleToggleFav = () => {
@@ -45,7 +45,7 @@ export const ProductCard = ({ product }: ProductCardProps) => {
 
   return (
     <div className="group relative flex flex-col rounded-lg bg-white p-3 shadow-sm hover:shadow-lg transition-all duration-300 max-w-xs sm:max-w-sm md:max-w-md w-full">
-      {discount > 0 && (
+      {discount && discount > 0 && (
         <Badge className="absolute top-2 left-2 z-10 bg-red-500 hover:bg-red-600 text-white">
           -{discount}%
         </Badge>
@@ -94,7 +94,7 @@ export const ProductCard = ({ product }: ProductCardProps) => {
       <div className="flex-1 flex flex-col">
         {/* Price */}
         <div className="mb-2 flex items-center gap-2">
-          {discount > 0 ? (
+          {discount && discount > 0 ? (
             <>
               <del className="text-sm text-gray-500">
                 {formatPrice(price)}

@@ -82,5 +82,5 @@ export interface Product {
 export interface CartItem {
   id: number;
   product: Product;
-  quantity: number;
+  qty?: number;
 }
