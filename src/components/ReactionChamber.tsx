@@ -3,7 +3,7 @@ import { motion, AnimatePresence } from "framer-motion";
 import type { Atom } from "../types/chemistry";
 import { AtomComponent } from "./Atom";
 import { MoleculeComponent } from "./Molecule";
-import { Sparkles } from 'lucide-react';
+import { Sparkles } from "lucide-react";
 
 interface ReactionChamberProps {
   atoms: Atom[];

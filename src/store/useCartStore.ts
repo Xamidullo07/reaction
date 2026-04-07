@@ -1,5 +1,5 @@
-import { useState, useCallback } from 'react';
-import type { CartItem } from '../types';
+import { useState, useCallback } from "react";
+import type { CartItem } from "../types";
 
 // Using a simple store pattern with React hooks
 let cartItems: CartItem[] = [];
@@ -7,7 +7,7 @@ let favoriteIds: number[] = [];
 let listeners: (() => void)[] = [];
 
 const notifyListeners = () => {
-  listeners.forEach(listener => listener());
+  listeners.forEach((listener) => listener());
 };
 
 export const useCartStore = () => {
@@ -21,16 +21,16 @@ export const useCartStore = () => {
   useState(() => {
     listeners.push(reRender);
     return () => {
-      listeners = listeners.filter(listener => listener !== reRender);
+      listeners = listeners.filter((listener) => listener !== reRender);
     };
   });
 
   const addToCart = useCallback((item: CartItem) => {
     const existingItem = cartItems.find((i) => i.id === item.id);
-    
+
     if (existingItem) {
       cartItems = cartItems.map((i) =>
-        i.id === item.id ? { ...i, qty: (i.qty ?? 1) + 1 } : i
+        i.id === item.id ? { ...i, qty: (i.qty ?? 1) + 1 } : i,
       );
     } else {
       cartItems = [...cartItems, { ...item, qty: item.qty ?? 1 }];

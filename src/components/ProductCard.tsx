@@ -1,11 +1,11 @@
-import { Heart, ShoppingCart, Check } from 'lucide-react';
-import { Button } from '../components/ui/button';
-import { Badge } from '../components/ui/badge';
-import { cn } from '../lib/utils';
-import type { Product } from '../types';
-import { formatPrice, calculateDiscountedPrice } from '../utils';
-import { StarRating } from './StarRating';
-import { useCartStore } from '../store/useCartStore';
+import { Heart, ShoppingCart, Check } from "lucide-react";
+import { Button } from "../components/ui/button";
+import { Badge } from "../components/ui/badge";
+import { cn } from "../lib/utils";
+import type { Product } from "../types";
+import { formatPrice, calculateDiscountedPrice } from "../utils";
+import { StarRating } from "./StarRating";
+import { useCartStore } from "../store/useCartStore";
 
 interface ProductCardProps {
   product: Product;
@@ -13,13 +13,14 @@ interface ProductCardProps {
 
 export const ProductCard = ({ product }: ProductCardProps) => {
   const { id, name_uz, price, discount, rating = 4, images } = product;
-  const mainImageUrl = images.find((item) => item.status === 'M')?.source || '';
-  
-  const { addToCart, removeFromCart, toggleFavorite, isInCart, isFavorite } = useCartStore();
-  
+  const mainImageUrl = images.find((item) => item.status === "M")?.source || "";
+
+  const { addToCart, removeFromCart, toggleFavorite, isInCart, isFavorite } =
+    useCartStore();
+
   const inCart = isInCart(id);
   const favorited = isFavorite(id);
-  
+
   const discountedPrice = calculateDiscountedPrice(price, discount ?? 0);
   const cartItem = {
     id,
@@ -27,7 +28,7 @@ export const ProductCard = ({ product }: ProductCardProps) => {
       id,
       name_uz,
       price: discountedPrice,
-      images: [{ status: 'M', source: mainImageUrl }],
+      images: [{ status: "M", source: mainImageUrl }],
     },
   };
 
@@ -61,8 +62,8 @@ export const ProductCard = ({ product }: ProductCardProps) => {
         >
           <Heart
             className={cn(
-              'w-5 h-5 transition-colors',
-              favorited ? 'fill-red-500 text-red-500' : 'text-gray-600'
+              "w-5 h-5 transition-colors",
+              favorited ? "fill-red-500 text-red-500" : "text-gray-600",
             )}
           />
         </Button>
@@ -96,9 +97,7 @@ export const ProductCard = ({ product }: ProductCardProps) => {
         <div className="mb-2 flex items-center gap-2">
           {discount && discount > 0 ? (
             <>
-              <del className="text-sm text-gray-500">
-                {formatPrice(price)}
-              </del>
+              <del className="text-sm text-gray-500">{formatPrice(price)}</del>
               <span className="text-lg font-bold text-emerald-600">
                 {formatPrice(discountedPrice)}
               </span>

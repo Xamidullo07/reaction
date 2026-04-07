@@ -1,15 +1,20 @@
-import * as React from "react"
-import { cn } from "../../lib/utils"
+import * as React from "react";
+import { cn } from "../../lib/utils";
 
 const Select = React.forwardRef<
   HTMLDivElement,
-  { children: React.ReactNode; value?: string; onValueChange?: (value: string) => void; className?: string }
+  {
+    children: React.ReactNode;
+    value?: string;
+    onValueChange?: (value: string) => void;
+    className?: string;
+  }
 >(({ className, children, ...props }, ref) => (
   <div ref={ref} className={className} {...props}>
     {children}
   </div>
-))
-Select.displayName = "Select"
+));
+Select.displayName = "Select";
 
 const SelectTrigger = React.forwardRef<
   HTMLButtonElement,
@@ -19,16 +24,16 @@ const SelectTrigger = React.forwardRef<
     ref={ref}
     className={cn(
       "flex h-10 w-full items-center justify-between rounded-md border border-input bg-background px-3 py-2 text-sm ring-offset-background placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50",
-      className
+      className,
     )}
     {...props}
   />
-))
-SelectTrigger.displayName = "SelectTrigger"
+));
+SelectTrigger.displayName = "SelectTrigger";
 
 const SelectValue = ({ placeholder }: { placeholder?: string }) => (
   <span>{placeholder}</span>
-)
+);
 
 const SelectContent = React.forwardRef<
   HTMLDivElement,
@@ -38,12 +43,12 @@ const SelectContent = React.forwardRef<
     ref={ref}
     className={cn(
       "relative z-50 max-h-96 w-full overflow-y-auto rounded-md border border-input bg-background p-1 shadow-md",
-      className
+      className,
     )}
     {...props}
   />
-))
-SelectContent.displayName = "SelectContent"
+));
+SelectContent.displayName = "SelectContent";
 
 const SelectItem = React.forwardRef<
   HTMLDivElement,
@@ -53,11 +58,11 @@ const SelectItem = React.forwardRef<
     ref={ref}
     className={cn(
       "relative flex w-full cursor-pointer select-none items-center rounded-sm py-1.5 pl-3 pr-8 text-sm outline-none hover:bg-accent focus:bg-accent data-disabled:pointer-events-none data-disabled:opacity-50",
-      className
+      className,
     )}
     {...props}
   />
-))
-SelectItem.displayName = "SelectItem"
+));
+SelectItem.displayName = "SelectItem";
 
-export { Select, SelectTrigger, SelectValue, SelectContent, SelectItem }
+export { Select, SelectTrigger, SelectValue, SelectContent, SelectItem };
